@@ -16,7 +16,7 @@ import frc.robot.commands.SampleInstantCommand;
 public class OI {
   //I have included the team's Xbox controller wrapper in this project.
   //This is how you create the xbox controller
-  public XBoxController xbox = new XBoxController(3);
+  public XBoxController xbox = new XBoxController(2);
   
   
   //// CREATING BUTTONS

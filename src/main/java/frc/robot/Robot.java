@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.Intake;
@@ -19,7 +21,7 @@ import frc.robot.subsystems.Intake;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static OI m_oi;
+  public static OI oi;
 
   //Create the intake
   public static Intake intake = new Intake();
@@ -30,7 +32,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
+    oi = new OI();
   }
 
   /**
@@ -62,6 +64,15 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
     //This is where you'll want to put code used for testing and calibration.
     //Feel free to either use subststem functions or just call motors directly
+    
+    //Get the joystick value
+    double joystickValue = -oi.xbox.getJoyLeftY()/2;
+
+    //Print out the value
+    System.out.println(joystickValue);
+
+    //Drive the motor with the speed from the joystick
+    RobotMap.intakeArmTalon.set(ControlMode.PercentOutput, joystickValue);
   }
 
   @Override
