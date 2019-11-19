@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import java.time.temporal.TemporalQueries;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -33,6 +35,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+    RobotMap.init();
   }
 
   /**
@@ -42,37 +45,43 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-  
+    int position = RobotMap.intakeArmTalon.getSelectedSensorPosition();
+    System.out.println(position+"\t"+target);
   }
 
   //This is called when teleop is enabled
   @Override
   public void teleopInit() {
-
+		//These are configurations for the motor controllers, don't worry about this part
   }
 
+  double target=143;
   //This function is called periodically during teleop
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+        //This is where you'll want to put code used for testing and calibration.
+    //Feel free to either use subststem functions or just call motors directly
+    
+    //Get the joystick value
+    double joystickValue = -oi.xbox.getJoyLeftY();
+
+    target = target+joystickValue;
+
+    //Print out the value
+   System.out.println(joystickValue);
+
+    //Drive the motor with the speed from the joystick
+    RobotMap.intakeArmTalon.set(ControlMode.Position, (int) target);
+
   }
+
 
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
-    //This is where you'll want to put code used for testing and calibration.
-    //Feel free to either use subststem functions or just call motors directly
-    
-    //Get the joystick value
-    double joystickValue = -oi.xbox.getJoyLeftY()/2;
-
-    //Print out the value
-    System.out.println(joystickValue);
-
-    //Drive the motor with the speed from the joystick
-    RobotMap.intakeArmTalon.set(ControlMode.PercentOutput, joystickValue);
   }
 
   @Override

@@ -41,19 +41,17 @@ public class RobotMap {
 	public static TalonSRX intakeRollerTalon = new TalonSRX(INTAKE_ROLLER_TALON);
 	public static final DigitalInput intakeLimitSwitch = new DigitalInput(INTAKE_LIMIT_SWITCH);
 
-	public RobotMap(){		
-		//These are configurations for the motor controllers, don't worry about this part
-		intakeArmVictor.follow(intakeArmTalon);
-
+	public static void init(){		
 		intakeArmTalon.configOpenloopRamp(0.1);
 		intakeArmTalon.configSelectedFeedbackSensor(FeedbackDevice.Analog);
 		intakeArmTalon.setSensorPhase(false);
 		intakeArmTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector,
 				LimitSwitchNormal.NormallyOpen);
-		intakeArmTalon.config_kP(0, 1.0, 0);
+		intakeArmTalon.config_kP(0, 4.0, 0);
 		intakeArmTalon.config_kI(0, 0.0, 0);
 		intakeArmTalon.config_kD(0, 0.001, 0);
 
+		intakeArmVictor.follow(intakeArmTalon);
 	}
 
 }
