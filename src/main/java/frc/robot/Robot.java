@@ -47,6 +47,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     int position = RobotMap.intakeArmTalon.getSelectedSensorPosition();
     System.out.println(position+"\t"+target);
+
+    
   }
 
   //This is called when teleop is enabled
@@ -69,10 +71,15 @@ public class Robot extends TimedRobot {
     target = target+joystickValue;
 
     //Print out the value
-   System.out.println(joystickValue);
+    System.out.println(joystickValue);
+
 
     //Drive the motor with the speed from the joystick
     RobotMap.intakeArmTalon.set(ControlMode.Position, (int) target);
+
+    if(RobotMap.intakeLimitSwitch.get()){
+      RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, 0.5);
+    }
 
   }
 
