@@ -47,7 +47,7 @@ public class RobotMap {
 		intakeArmTalon.setSensorPhase(false);
 		intakeArmTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector,
 				LimitSwitchNormal.NormallyOpen);
-		intakeArmTalon.config_kP(0, 4.0, 0);
+		intakeArmTalon.config_kP(0, 2.0, 0);
 		intakeArmTalon.config_kI(0, 0.0, 0);
 		intakeArmTalon.config_kD(0, 0.001, 0);
 

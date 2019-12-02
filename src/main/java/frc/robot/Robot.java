@@ -66,21 +66,21 @@ public class Robot extends TimedRobot {
     //Feel free to either use subststem functions or just call motors directly
     
     //Get the joystick value
-    double joystickValue = -oi.xbox.getJoyLeftY();
+    double joystickValue = 0.5 * -oi.xbox.getJoyLeftY();
 
     target = target+joystickValue;
 
     //Print out the value
-    System.out.println(joystickValue);
-
+    System.out.println(target);
 
     //Drive the motor with the speed from the joystick
     RobotMap.intakeArmTalon.set(ControlMode.Position, (int) target);
+    //RobotMap.intakeArmTalon.set(ControlMode.PercentOutput, joystickValue);
 
     if(RobotMap.intakeLimitSwitch.get()){
       RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, 0.5);
     }
-
+    
   }
 
 
