@@ -71,16 +71,20 @@ public class Robot extends TimedRobot {
     target = target+joystickValue;
 
     //Print out the value
-    System.out.println(target);
+    //System.out.println(RobotMap.intakeLimitSwitch.get());
 
     //Drive the motor with the speed from the joystick
     RobotMap.intakeArmTalon.set(ControlMode.Position, (int) target);
     //RobotMap.intakeArmTalon.set(ControlMode.PercentOutput, joystickValue);
 
+    //returns true when not pressed, false when pressed
     if(RobotMap.intakeLimitSwitch.get()){
-      RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, 0.5);
+      RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, -0.3);
+    }else{
+      RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, 0);
+      target = 350;
     }
-    
+
   }
 
 
