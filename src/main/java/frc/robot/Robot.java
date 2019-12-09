@@ -59,6 +59,9 @@ public class Robot extends TimedRobot {
 
   double target=143;
   //This function is called periodically during teleop
+
+  boolean switchPressed = false;
+
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
@@ -77,12 +80,20 @@ public class Robot extends TimedRobot {
     RobotMap.intakeArmTalon.set(ControlMode.Position, (int) target);
     //RobotMap.intakeArmTalon.set(ControlMode.PercentOutput, joystickValue);
 
-    //returns true when not pressed, false when pressed
-    if(RobotMap.intakeLimitSwitch.get()){
-      RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, -0.3);
-    }else{
+    //!RobotMap.intakeLimitSwitch.get() returns true when pressed, false when not pressed
+    if(!RobotMap.intakeLimitSwitch.get() || switchPressed){
       RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, 0);
       target = 350;
+      switchPressed = true;
+      
+    }else{
+      RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, -0.3);
+    }
+
+    //if the a button is pressed, outtake 
+    if(oi.xbox.getButtonA()){
+      RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, 0.3);
+      switchPressed = false;
     }
 
   }
