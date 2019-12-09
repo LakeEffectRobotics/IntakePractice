@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     int position = RobotMap.intakeArmTalon.getSelectedSensorPosition();
-    System.out.println(position+"\t"+target);
+    System.out.println(position - target);
 
     
   }
