@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Intake;
 
 /**
@@ -46,7 +47,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     int position = RobotMap.intakeArmTalon.getSelectedSensorPosition();
-    System.out.println(position+"\t"+target);
+    //System.out.println(position+"\t"+target);
 
     
   }
@@ -83,7 +84,7 @@ public class Robot extends TimedRobot {
     //!RobotMap.intakeLimitSwitch.get() returns true when pressed, false when not pressed
     if(!RobotMap.intakeLimitSwitch.get() || switchPressed){
       RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, 0);
-      target = 350;
+      //target = 350;
       switchPressed = true;
       
     }else{
@@ -91,9 +92,13 @@ public class Robot extends TimedRobot {
     }
 
     //if the a button is pressed, outtake 
+    System.out.println(oi.xbox.getJoyRightX());
+
     if(oi.xbox.getButtonA()){
       RobotMap.intakeRollerTalon.set(ControlMode.PercentOutput, 0.3);
       switchPressed = false;
+      System.out.println("A is pressed");
+      //target=143;
     }
 
   }
